@@ -1,28 +1,24 @@
-<h2>sign up</h2>
+<html>
+  <body>
+    <h2>sign up</h2>
 
-<form>
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" required ><br>
-   
-  <label for="insertion">Insertion:</label><br>
-  <input type="text" id="insertion" name="insertion">
+    <form action="signup.php" method="POST">
+      <input type="text" id="fname" name="fname" required placeholder="First name"><br>
 
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" required>
+      <input type="text" id="insertion" name="insertion" placeholder="Insertion"><br> 
 
-  <label for="email">Email:</label><br>
-  <input type="text" id="email" name="email" required>
+      <input type="text" id="lname" name="lname" required placeholder="Last name"><br>
 
-  <label for="lname">Username:</label><br>
-  <input type="text" id="username" name="username" required>
+      <input type="text" id="email" name="email" required placeholder="Email"><br>
 
-  <label for="password">Password:</label><br>
-  <input type="password" id="password" name="password" required>
+      <input type="text" id="username" name="username" required placeholder="Username"><br>
 
-  <label for="password">Repeat password:</label><br>
-  <input type="repassword" id="repassword" name="repassword" required>
-  
-  <button type="submit">sign up</button>
+      <input type="password" id="password" name="password" required placeholder="password"><br>
 
-</form>
+      <input type="repassword" id="repassword" name="repassword" required placeholder="Repeat password"><br>
 
+      <button type="submit">sign up</button>
+
+    </form>
+  </body>
+</html>
