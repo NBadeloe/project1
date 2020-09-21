@@ -1,3 +1,4 @@
+-- create table
 DROP DATABASE IF EXISTS project1;
 CREATE DATABASE project1;
 
@@ -20,3 +21,11 @@ CREATE TABLE (
   PRIMARY KEY id,
   FOREIGN KEY account_id REFRENCES account(account_id)
 );
+
+-- add dummy admin account
+
+INSERT INTO account (email, password) 
+VALUES ('admin@mail.com', 'password1');
+
+INSERT INTO person (account_id, first_name, last_name, email, password) 
+VALUES (1, 'Admin', 'User', 'admin@mail.com', 'password1');
