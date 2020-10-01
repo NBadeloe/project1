@@ -1,16 +1,5 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fname = $_POST['fname'];
-    $insertion = $_POST['insertion'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $usrname = $_POST['username'];
-    $passwrd = $_POST['password'];
-    $hash = md5($passwrd);
-    }  
-
-
 class Database
 {
     private $host;
@@ -41,10 +30,19 @@ class Database
         }
     }
 
-    public function executeQuery($fname, $insertion, $lname, $email, $usrname, $hash){
-        $sql = "INSERT INTO project1 (first_name, insertion, last_name, email, username, password) VALUES ($fname, $insertion, $lname, $email, $usrname, $hash) ";
-        $statement = $this->db->prepare($sql);
-        $statement->execute($sql);        
+    public function executeQuery(){
+        $fname = $_POST['fname'];
+        $insertion = $_POST['insertion'];
+        $lname = $_POST['lname'];
+        $email = $_POST['email'];
+        $usrname = $_POST['username'];
+        $passwrd = $_POST['password'];
+        $hash = md5($passwrd);
+            $sql = "INSERT INTO project1 (first_name, insertion, last_name, email, username, password) VALUES ($fname, $insertion, $lname, $email, $usrname, $hash) ";
+            
+            $statement = $this->db->prepare($sql);
+            $statement->execute(array($sql)); 
+            $statement->fetch();       
     }
 }
 

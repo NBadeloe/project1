@@ -1,16 +1,15 @@
 -- create table
-DROP DATABASE IF EXISTS project1;
 CREATE DATABASE project1;
 
 CREATE TABLE account(
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   email VARCHAR(100) UNIQUE,
   password VARCHAR(100),
   PRIMARY KEY(id)
 );
 
 CREATE TABLE (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   first_name varchar(45),
   insertion varchar(15),
   last_name varchar(45),

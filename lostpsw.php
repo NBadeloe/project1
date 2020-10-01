@@ -5,7 +5,7 @@
 
             <input type="text" id="email" name="email" required placeholder="Email">
 
-            <button type="submit">change password</button>
+            <input type="submit" value="change password"> 
         </form>
     </body>
 </html>
