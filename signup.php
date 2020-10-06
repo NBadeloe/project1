@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $db = new Database('localhost', 'root', '', 'project1', 'utf8');
-$db->executeQuery($fname, $insertion, $lname, $email, $usrname, $hash);
+$db->insert($fname, $insertion, $lname, $email, $usrname, $hash);
 
 ?>
 <html>

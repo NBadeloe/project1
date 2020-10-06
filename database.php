@@ -20,8 +20,9 @@ class Database
         $this->database = $database;
         $this->charset = $charset;
 
+        //make db connection
         try {
-            $dsn = "mysql:host=localhost;$this->host;dbname=$this->database;charset=$this->charset";
+            $dsn = "mysql:host=$this->host;dbname=$this->database;charset=$this->charset";
             $this->db = new PDO($dsn, $this->user, $this->password);
             echo "connected!";
         } catch (PDOException $e) {
@@ -30,19 +31,24 @@ class Database
         }
     }
 
-    public function executeQuery(){
-        $fname = $_POST['fname'];
-        $insertion = $_POST['insertion'];
-        $lname = $_POST['lname'];
-        $email = $_POST['email'];
-        $usrname = $_POST['username'];
-        $passwrd = $_POST['password'];
-        $hash = md5($passwrd);
-            $sql = "INSERT INTO project1 (first_name, insertion, last_name, email, username, password) VALUES ($fname, $insertion, $lname, $email, $usrname, $hash) ";
-            
+    public function insert($fname, $insertion, $lname, $email, $usrname, $hash){
+            $this->db->beginTransaction();
+
+            //insert in account
+            $sql = "INSERT INTO account (email, password) 
+                VALUES (:email, :password) ";
             $statement = $this->db->prepare($sql);
-            $statement->execute(array($sql)); 
-            $statement->fetch();       
+            $statement->execute(['email' => $email, 'password' => $hash]);
+
+            //get account_id
+            $acc_id = $this->db->lastInsertId();
+
+            //insert in person
+            $sql = "INSERT INTO person (account_id, first_name, insertion, last_name, email, username, password) 
+                VALUES (:account_id, :first_name, :insertion, :last_name, :email, :username, :password) ";
+            $statement = $this->db->prepare($sql);
+            $statement->execute(['account_id'=> $acc_id, 'first_name'=> $fname , 'insertion' => $insertion, 'last_name' => $lname , 'email' => $email, 'username' => $usrname, 'password' => $hash]); 
+            $this->db->commit();       
     }
 }
 
