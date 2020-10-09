@@ -8,7 +8,7 @@ CREATE TABLE account(
   PRIMARY KEY(id)
 );
 
-CREATE TABLE (
+CREATE TABLE person(
   id INT NOT NULL AUTO_INCREMENT,
   first_name varchar(45),
   insertion varchar(15),
@@ -28,3 +28,29 @@ VALUES ('admin@mail.com', 'password1');
 
 INSERT INTO person (account_id, first_name, last_name, email, password) 
 VALUES (1, 'Admin', 'User', 'admin@mail.com', 'password1');
+
+--create table usertype
+CREATE TABLE usertype(
+    id INT NOT NULL AUTO_INCREMENT,
+    type VARCHAR(40),
+    created_at DATE,
+    updated_at DATE,
+    PRIMARY KEY (id)
+    )
+-- alter person and account   
+ALTER TABLE account
+    ADD type INT,
+    ADD created_at DATE,
+    ADD updated_at DATE, 
+    ADD FOREIGN KEY (type) REFERENCES usertype(id)
+    ;
+    
+    
+ALTER TABLE person
+	DROP COLUMN email, 
+    DROP COLUMN username, 
+    DROP COLUMN password,
+    ADD created_at DATE,
+    ADD updated_at DATE
+    ;
+      
