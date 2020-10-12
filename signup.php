@@ -1,22 +1,46 @@
 <?php
 include 'database.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $fname = $_POST['fname'];
-  $insertion = $_POST['insertion'];
-  $lname = $_POST['lname'];
-  $email = $_POST['email'];
-  $usrname = $_POST['username'];
-  $passwrd = $_POST['password'];
-  $hash = md5($passwrd);
-} else{
-  echo "error";
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//   $fname = $_POST['fname'];
+//   $insertion = $_POST['insertion'];
+//   $lname = $_POST['lname'];
+//   $email = $_POST['email'];
+//   $usrname = $_POST['username'];
+//   $passwrd = $_POST['password'];
+//   $hash = md5($passwrd);
+// } else{
+// //   echo "error";
+// }
+$fieldnames = ['fname', 'lname', 'email', 'username', 'password'];
+$error = FALSE;
+
+foreach ($fieldnames as $field) {
+  if (empty(isset($field))) {
+    $error = TRUE;
+  }
 }
 
-$db = new Database('localhost', 'root', '', 'project1', 'utf8');
-$db->insert($fname, $insertion, $lname, $email, $usrname, $hash);
+  if ($error != TRUE) {
+    $_SERVER["REQUEST_METHOD"] == "POST";
+    $fname = $_POST['fname'];
+    $insertion = $_POST['insertion'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $usrname = $_POST['username'];
+    $passwrd = $_POST['password'];
+    $hash = md5($passwrd);
+    
+    $db = new Database('localhost', 'root', '', 'project1', 'utf8');
+    $db->insert($fname, $insertion, $lname, $email, $usrname, $hash);
+  }
+ 
+
+
+
 
 ?>
+
 <html>
   <body>
     <h2>sign up</h2>
