@@ -33,15 +33,15 @@ VALUES (1, 'Admin', 'User', 'admin@mail.com', 'password1');
 CREATE TABLE usertype(
     id INT NOT NULL AUTO_INCREMENT,
     type VARCHAR(40),
-    created_at DATE,
-    updated_at DATE,
+    created_at DATETIME,
+    updated_at DATETIME,
     PRIMARY KEY (id)
     )
 -- alter person and account   
 ALTER TABLE account
     ADD type INT,
-    ADD created_at DATE,
-    ADD updated_at DATE, 
+    ADD created_at DATETIME,
+    ADD updated_at DATETIME, 
     ADD FOREIGN KEY (type) REFERENCES usertype(id)
     ;
     
@@ -50,7 +50,7 @@ ALTER TABLE person
 	DROP COLUMN email, 
     DROP COLUMN username, 
     DROP COLUMN password,
-    ADD created_at DATE,
-    ADD updated_at DATE
+    ADD created_at DATETIME,
+    ADD updated_at DATETIME
     ;
       
