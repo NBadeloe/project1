@@ -24,7 +24,7 @@ class Database
         try {
             $dsn = "mysql:host=$this->host;dbname=$this->database;charset=$this->charset";
             $this->db = new PDO($dsn, $this->user, $this->password);
-            echo "connected!";
+            // echo "connected!";
         } catch (PDOException $e) {
             echo $e->getMessage();
             exit("connection failed");
@@ -32,24 +32,26 @@ class Database
     }
 
     public function insert($fname, $insertion, $lname, $email, $usrname, $hash){
+          $created_at = $updated_at = date('Y-m-d H:i:s');
             $this->db->beginTransaction();
 
             //insert in account
-            $sql = "INSERT INTO account (email, password) 
-                VALUES (:email, :password) ";
+            $sql = "INSERT INTO account (email, password, type, created_at, updated_at) 
+                VALUES (:email, :password, :type, :created_at, :updated_at) ";
             $statement = $this->db->prepare($sql);
-            $statement->execute(['email' => $email, 'password' => $hash]);
+            $statement->execute(['email' => $email, 'password' => $hash, 'type' => 1, 'created_at' => $created_at, 'updated_at' => $updated_at]);
 
             //get account_id
             $acc_id = $this->db->lastInsertId();
 
             //insert in person
-            $sql = "INSERT INTO person (account_id, first_name, insertion, last_name, email, username, password) 
-                VALUES (:account_id, :first_name, :insertion, :last_name, :email, :username, :password) ";
+            $sql = "INSERT INTO person (account_id, first_name, insertion, last_name, created_at, updated_at) 
+                VALUES (:account_id, :first_name, :insertion, :last_name, :created_at, :updated_at) ";
             $statement = $this->db->prepare($sql);
-            $statement->execute(['account_id'=> $acc_id, 'first_name'=> $fname , 'insertion' => $insertion, 'last_name' => $lname , 'email' => $email, 'username' => $usrname, 'password' => $hash]); 
+            $statement->execute(['account_id'=> $acc_id, 'first_name'=> $fname , 'insertion' => $insertion, 'last_name' => $lname , 'created_at' => $created_at, 'updated_at' => $updated_at]); 
             $this->db->commit();       
     }
 }
+
 
 ?>

@@ -1,17 +1,6 @@
 <?php
 include 'database.php';
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//   $fname = $_POST['fname'];
-//   $insertion = $_POST['insertion'];
-//   $lname = $_POST['lname'];
-//   $email = $_POST['email'];
-//   $usrname = $_POST['username'];
-//   $passwrd = $_POST['password'];
-//   $hash = md5($passwrd);
-// } else{
-// //   echo "error";
-// }
 $fieldnames = ['fname', 'lname', 'email', 'username', 'password'];
 $error = FALSE;
 
@@ -23,8 +12,11 @@ foreach ($fieldnames as $field) {
 }
   if ($error != TRUE) {
     $_SERVER["REQUEST_METHOD"] == "POST";
-    //check if passwords match
-      if ($_POST['password'] == $_POST['repassword']) {
+    //validate email
+    // if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    //   echo "Invalid email format";
+    // } elseif 
+    if ($_POST['password'] == $_POST['repassword']) {
       //create account
         $fname = $_POST['fname'];
         $insertion = $_POST['insertion'];
@@ -36,7 +28,8 @@ foreach ($fieldnames as $field) {
         
         $db = new Database('localhost', 'root', '', 'project1', 'utf8');
         $db->insert($fname, $insertion, $lname, $email, $usrname, $hash);
-      } else{
+    }
+      else{
         echo "passwords dont match";
       }
     
