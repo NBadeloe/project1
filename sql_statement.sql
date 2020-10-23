@@ -17,8 +17,8 @@ CREATE TABLE person(
   username varchar(30),
   password varchar(100),
   account_id INT,
-  PRIMARY KEY id,
-  FOREIGN KEY account_id REFRENCES account(account_id)
+  PRIMARY KEY (id),
+  FOREIGN KEY account_id REFRENCES account(id)
 );
 
 -- add dummy admin account
