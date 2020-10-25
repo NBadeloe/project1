@@ -1,0 +1,11 @@
+span{
+    color: red;    
+}
+
+span.succes{
+    color:lightseagreen;
+}
+
+table, th, td{
+    border: 1px solid black;
+}
